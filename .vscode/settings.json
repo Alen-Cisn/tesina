@@ -1,0 +1,3 @@
+{"yaml.schemas": {
+  "https://json.schemastore.org/hayagriva.json": ["refs.yml", "*.hayagriva.yml"]
+}}

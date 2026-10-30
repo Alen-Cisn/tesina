@@ -1,0 +1,135 @@
+kumar2026intuition:
+  type: article
+  title: "Intuition to Evidence: Measuring AI's True Impact on Developer Productivity"
+  author:
+    - Kumar, A.
+    - Khare, V.
+    - Sharma, D.
+    - Kumar, S.
+    - Saini, V.
+    - Yadav, A.
+    - Jain, S.
+    - Rana, A.
+    - Verma, P.
+    - Meena, V.
+    - Edubilli, A.
+  date: 2026
+  parent:
+    type: periodical
+    title: ArXiv
+  serial-number:
+    doi: 10.48550/arXiv.2509.19708
+  url:
+    value: https://doi.org/10.48550/arXiv.2509.19708
+
+ma2025bridging:
+  type: article
+  title: Bridging Natural Language and Formal Specification-Automated Translation of Software Requirements to LTL via Hierarchical Semantics Decomposition Using LLMs
+  author:
+    - Ma, Z.
+    - Wen, C.
+    - Su, Z.
+    - Liang, X.
+    - Tian, C.
+    - Qin, S.
+    - Yang, M.
+  date: 2025
+  parent:
+    type: periodical
+    title: ArXiv
+  serial-number:
+    doi: 10.48550/arXiv.2512.17334
+  url:
+    value: https://doi.org/10.48550/arXiv.2512.17334
+
+mohsin2024trust:
+  type: article
+  title: "Can We Trust Large Language Models Generated Code? A Framework for In-Context Learning, Security Patterns, and Code Evaluations Across Diverse LLMs"
+  author:
+    - Mohsin, A.
+    - Janicke, H.
+    - Wood, A.
+    - Sarker, I. H.
+    - Maglaras, L.
+    - Janjua, N.
+  date: 2024
+  parent:
+    type: periodical
+    title: ArXiv
+  serial-number:
+    doi: 10.48550/arXiv.2406.12513
+  url:
+    value: https://doi.org/10.48550/arXiv.2406.12513
+
+peirce1878ideas:
+  type: article
+  title: How to make our ideas clear
+  author: Peirce, C. S.
+  date: 1878
+  page-range: 286-302
+  parent:
+    type: periodical
+    title: Popular Science Monthly
+    volume: 12
+
+sorokin2024continuous:
+  type: article
+  title: Towards Continuous Assurance Case Creation for ADS with the Evidential Tool Bus
+  author:
+    - Sorokin, L.
+    - Bouchekir, R.
+    - Beyene, T. A.
+    - Liao, B.
+    - Molin, A.
+  date: 2024
+  parent:
+    type: periodical
+    title: ArXiv
+  serial-number:
+    doi: 10.48550/arXiv.2403.01918
+  url:
+    value: https://doi.org/10.48550/arXiv.2403.01918
+
+zhang2024renaissance:
+  type: article
+  title: "Renaissance of Literate Programming in the Era of LLMs: Enhancing LLM-Based Code Generation in Large-Scale Projects"
+  author:
+    - Zhang, W.
+    - Li, Y.
+    - Dong, Z.
+    - Wu, Y.
+    - Zhou, Y.
+    - Wang, D.
+    - Xing, S.
+    - Zhou, C.
+    - Shen, D.
+  date: 2024
+  parent:
+    type: periodical
+    title: ArXiv
+  serial-number:
+    doi: 10.48550/arXiv.2502.17441
+  url:
+    value: https://doi.org/10.48550/arXiv.2502.17441
+
+knuth1984literate:
+  type: article
+  title: "Literate Programming"
+  author: Knuth, Donald E.
+  date: 1984
+  page-range: 97-111
+  parent:
+    type: periodical
+    title: The Computer Journal
+    volume: 27
+    issue: 2
+  serial-number:
+    doi: 10.1093/comjnl/27.2.97
+
+gsn2021standard:
+  type: book
+  title: "Goal Structuring Notation Community Standard Version 3"
+  author: "Assurance Case Working Group, Safety-Critical Systems Club"
+  date: 2021
+  serial-number:
+    isbn: 979-8451294949

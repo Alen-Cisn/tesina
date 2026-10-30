@@ -1,0 +1,340 @@
+% ============================================================================
+% ref.bib — Bibliografía de la tesis
+% ----------------------------------------------------------------------------
+% Fuentes fundamentales de verificación formal (Lean 4) y validación humana
+% de código generado por LLMs.
+% ============================================================================
+
+% Lean 4: asistente de pruebas y lenguaje de programación (referencia canónica
+% del eje de verificación formal de la tesis).
+@inproceedings{moura2021lean,
+	title = {The {Lean} 4 {Theorem} {Prover} and {Programming} {Language}},
+	author = {de Moura, Leonardo and Ullrich, Sebastian},
+	year = {2021},
+	booktitle = {Computer Aided Verification (CAV 2021)},
+	series = {Lecture Notes in Computer Science},
+	volume = {12759},
+	pages = {625--670},
+	publisher = {Springer},
+	doi = {10.1007/978-3-030-81685-8_24},
+}
+
+% Programación literaria verificable (VLP): validación humana de código LLM
+% mediante documentación NL no ambigua + verificación formal por model checking.
+% Directamente alineado con la hipótesis de esta tesis.
+@article{yuan2026guiding,
+	title = {Guiding {Human} {Validation} of {LLM}-{Generated} {Code} via {Verifiable} {Literate} {Programming}},
+	author = {Yuan, Ziqi and Lu, Wenhao and Wu, Hao and Jin, Dunhong and Wu, Chuan},
+	year = {2026},
+	journal = {ArXiv},
+	doi = {10.48550/arXiv.2607.02333},
+}
+
+% ============================================================================
+% ref.bib — Bibliografía de la tesis
+% "Programación Literaria Verificada Formalmente": sistema neuro-simbólico que
+% integra generación de código por LLMs, verificación formal (Lean 4),
+% programación literaria y auditoría humana, con el Triage de Manchester
+% como caso de estudio.
+%
+% Temas:
+%  (A) Triage de Manchester / software clínico (caso de estudio)
+%  (B) LLMs y verificación formal / theorem proving en Lean 4
+%  (C) Programación literaria y validación humana de código LLM
+%  (D) Requisitos, seguridad y productividad en desarrollo con LLMs
+% ============================================================================
+
+% ----------------------------------------------------------------------------
+% (A) CASO DE ESTUDIO: TRIAGE DE MANCHESTER
+% ----------------------------------------------------------------------------
+
+% Texto canónico del Manchester Triage System (MTS): define los 50+ flujogramas
+% y discriminadores que traducen quejas clínicas a cinco niveles de urgencia.
+% Es la fuente de la lógica de decisión clínica que la tesis convertirá en
+% requisitos verificables formalmente.
+@book{noauthor_emergency_nodate,
+	title = {Emergency {Triage}},
+	publisher = {Wiley-Blackwell / BMJ Books},
+	year = {2014},
+	address = {Chichester, UK},
+	url = {https://www.wiley.com/en-us/Emergency+Triage,+3rd+Edition-p-9781118299067},
+}
+
+% Sistemas de soporte de decisión clínica construidos sobre categorías MTS:
+% precedente directo de que el triage de Manchester es computable y que las
+% variables administrativas + clínicas alimentan modelos predictivos; motiva
+% el prototipo propuesto como sistema de decisión auditable.
+@article{zlotnik_building_2016,
+	title = {Building a {Decision} {Support} {System} for {Inpatient} {Admission} {Prediction} {With} the {Manchester} {Triage} {System} and {Administrative} {Check}-in {Variables}},
+	volume = {34},
+	number = {5},
+	journal = {CIN: Computers, Informatics, Nursing},
+	publisher = {Ovid Technologies (Wolters Kluwer Health)},
+	author = {Zlotnik, Alexander and Alfaro, Miguel Cuch{\'i} and P{\'e}rez, Mar{\'i}a Carmen P{\'e}rez and Gallardo-Antol{\'i}n, Ascensi{\'o}n and Mart{\'i}nez, Juan Manuel Montero},
+	year = {2016},
+	pages = {224--230},
+	doi = {10.1097/CIN.0000000000000230},
+}
+
+% Evaluación empírica de una app de self-triage basada en MTS vs. triage
+% profesional: cuantifica los errores de clasificación (kappa 0.198, sobretriage
+% 51.1%) que justifican la necesidad de lógica de triage verificable y auditable
+% en lugar de software clínico no verificado.
+@article{onler_agreement_2026,
+	title = {Agreement and {Classification} {Performance} of a {Mobile} {Self}-{Triage} {Application} {Based} on the {Manchester} {Triage} {System} in {Hemodynamically} {Stable} {Adult} {Walk}-{In} {Emergency} {Department} {Patients}: {A} {Prospective} {Observational} {Study}},
+	volume = {15},
+	number = {17},
+	journal = {Journal of Clinical Medicine},
+	publisher = {MDPI AG},
+	author = {{\"O}nler, Ahmet Bu{\u{g}}ra and Serin, Suha and Caglar, Bahadir},
+	year = {2026},
+	pages = {6702},
+	doi = {10.3390/jcm15176702},
+}
+
+% LLMs aplicados directamente a triage de emergencias: muestra el estado del
+% arte (y sus límites) del uso de LLMs sin verificación formal en el dominio
+% clínico exacto del caso de estudio de la tesis.
+@article{masanneck_triage_2024,
+	title = {Triage {Performance} {Across} {Large} {Language} {Models}, {ChatGPT}, and {Untrained} {Doctors} in {Emergency} {Medicine}: {Comparative} {Study}},
+	volume = {26},
+	journal = {Journal of Medical Internet Research},
+	author = {Masanneck, Lars and Schmidt, Linea and Seifert, Antonia and K{\"o}lsche, Tristan and Huntemann, Niklas and Jansen, Robin and Mehsin, Mohammed and Bernhard, Michael and Meuth, Sven G. and B{\"o}hm, Lennert and Pawlitzki, Marc},
+	year = {2024},
+	pages = {e53297},
+	doi = {10.2196/53297},
+}
+
+
+
+% ----------------------------------------------------------------------------
+% (B) LLMS + VERIFICACIÓN FORMAL (LEAN 4 / ROCQ)
+% ----------------------------------------------------------------------------
+
+% LeanDojo: infraestructura open-source para interactuar programáticamente con
+% el entorno de pruebas de Lean; base técnica candidata para el motor de
+% verificación formal del código generado por LLMs en la tesis.
+@misc{yang_leandojo_2023,
+	title = {{LeanDojo}: {Theorem} {Proving} with {Retrieval}-{Augmented} {Language} {Models}},
+	url = {https://arxiv.org/abs/2306.15626},
+	author = {Yang, Kaiyu and Swope, Aidan M. and Gu, Alex and Chalamala, Rahul and Song, Peiyang and Yu, Shixing and Godil, Saad and Prenger, Ryan and Anandkumar, Anima},
+	year = {2023},
+	note = {arXiv:2306.15626},
+}
+
+% Lean Copilot: LLMs como copilotos dentro de Lean (sugerencia de pasos de
+% prueba, selección de premisas). Referencia clave del paradigma neuro-simbólico
+% que la tesis adopta: el LLM propone, el kernel de Lean verifica.
+@misc{song_lean_2024,
+	title = {Lean {Copilot}: {Large} {Language} {Models} as {Copilots} for {Theorem} {Proving} in {Lean}},
+	url = {https://arxiv.org/abs/2404.12534},
+	author = {Song, Peiyang and Yang, Kaiyu and Anandkumar, Anima},
+	year = {2024},
+	note = {arXiv:2404.12534},
+}
+
+% AXLE: infraestructura cloud con 14 herramientas de metaprogramación Lean 4
+% (verificación estricta, extracción de metadatos, reparación de pruebas) vía
+% MCP/HTTP; candidato para el backend de verificación a escala del prototipo.
+@misc{xin_axle_2026,
+	title = {{AXLE}: {A} {Cloud} {Infrastructure} for {Lean} 4 {Theorem} {Proving} {Utilities}},
+	url = {https://arxiv.org/abs/2606.26442},
+	author = {Xin, Jimmy and Schneidman, Alex and Cummins, Chris and Ram, Karun and Ganesh, Srihari and Limperg, Jannis},
+	year = {2026},
+	note = {arXiv:2606.26442},
+}
+
+% LeanExplore: buscador semántico de declaraciones Lean 4 integrable con LLMs
+% vía MCP; útil para la recuperación de premisas/lemas durante la generación
+% verificada del prototipo.
+% @misc{asher_leanexplore_2025,
+% 	title = {{LeanExplore}: {A} search engine for {Lean} 4 declarations},
+% 	url = {https://arxiv.org/abs/2506.11085},
+% 	author = {Asher, Justin},
+% 	year = {2025},
+% 	note = {arXiv:2506.11085},
+% }
+
+% miniF2F: benchmark estándar para theorem proving neuronal; marco de
+% evaluación potencial para medir la capacidad del sistema de formalizar
+% requisitos en Lean.
+@misc{zheng_minif2f_2021,
+	title = {{MiniF2F}: a cross-system benchmark for formal {Olympiad}-level mathematics},
+	url = {https://arxiv.org/abs/2109.00110},
+	author = {Zheng, Kunhao and Han, Jesse Michael and Polu, Stanislas},
+	year = {2021},
+	note = {arXiv:2109.00110},
+}
+
+% Llemma: LLM abierto para matemáticas capaz de uso de herramientas y theorem
+% proving; referencia sobre modelos base especializados que podrían alimentar
+% el componente de generación/formalización.
+% @misc{azerbayev_llemma_2023,
+% 	title = {Llemma: {An} {Open} {Language} {Model} {For} {Mathematics}},
+% 	url = {https://arxiv.org/abs/2310.10631},
+% 	author = {Azerbayev, Zhangir and Schoelkopf, Hailey and Paster, Keiran and Santos, Marco Dos and McAleer, Stephen and Jiang, Albert Q. and Deng, Jia and Biderman, Stella and Welleck, Sean},
+% 	year = {2023},
+% 	note = {arXiv:2310.10631},
+% }
+
+% Agentes autónomos LLM+MCP resolviendo problemas del Putnam en Rocq: evidencia
+% reciente de que un agente LLM equipado con herramientas MCP de un asistente
+% de pruebas puede verificar formalmente a escala — el patrón de arquitectura
+% que la tesis propone llevar a software crítico.
+@misc{baudart_putnam_2026,
+	title = {Putnam 2025 {Problems} in {Rocq} using {Opus} 4.6 and {Rocq}-{MCP}},
+	url = {https://arxiv.org/abs/2603.20405},
+	author = {Baudart, Guillaume and Lelarge, Marc and St{\'e}rin, Tristan and Viennot, Jules},
+	year = {2026},
+	note = {arXiv:2603.20405},
+}
+
+% Framework informal (LLM) + formal (Lean 4) con descomposición de tareas y
+% refinamiento iterativo: antecedente directo del pipeline de la tesis
+% (requisitos en lenguaje natural -> artefactos formalmente verificados).
+@misc{ju_automated_2026,
+	title = {Automated {Conjecture} {Resolution} with {Formal} {Verification}},
+	url = {https://arxiv.org/abs/2604.03789},
+	author = {Ju, Haocheng and Gao, Guoxiong and Jiang, Jiedong and Wu, Bin and Sun, Zeming and Liu, Shurui and Chen, Leheng and Wang, Yutong and Wang, Yuefeng and Wang, Zichen and He, Wanyi and Wu, Peihao and Xiao, Liang and Liu, Ruochuan and Dai, Bryan and Dong, Bin},
+	year = {2026},
+	note = {arXiv:2604.03789},
+}
+
+% Certificados verificables en Lean 4 como frontera de confianza para pipelines
+% LLM, incluida la decisión clínica: alinea directamente con la tesis como
+% mecanismo para hacer auditables los componentes no deterministas.
+@misc{koomullil_proof-carrying_2026,
+	title = {Proof-{Carrying} {Certificates} for {LLM} {Pipelines}: {A} {Trust}-{Boundary} {Architecture}},
+	url = {https://arxiv.org/abs/2605.16407},
+	author = {Koomullil, George},
+	year = {2026},
+	note = {arXiv:2605.16407},
+}
+
+% ----------------------------------------------------------------------------
+% (C2) PROGRAMACIÓN LITERARIA / CUADERNOS / AUDITORÍA Y CALIDAD DE SOFTWARE
+% ----------------------------------------------------------------------------
+
+% Calidad de cuadernos Jupyter publicados institucionalmente (British Library):
+% propone el pipeline FAIR-checker para auditar reproducibilidad y calidad de
+% artefactos en programación literaria; sustenta el eje de auditoría
+% humana/máquina sobre el notebook de la tesis.
+@article{candela_approach_2023,
+	title = {An {Approach} to {Assess} the {Quality} of {Jupyter} {Projects} {Published} by {Institutions}},
+	volume = {44},
+	number = {4},
+	journal = {Journal of the Association for Information Science and Technology},
+	publisher = {Wiley},
+	author = {Candela, Gustavo and Sanyal, Twishya and Qayyum, Aakash and Luaces, Miguel and Laredo, James},
+	year = {2023},
+	pages = {537--552},
+	doi = {10.1002/asi.24835},
+}
+
+% Sistema literario auditable para análisis estadístico en R: muestra cómo
+% combinar prosa narrativa + código ejecutable + verificación para hacer
+% reproducible y auditable el análisis; marco comparativo directo para el
+% prototipo neuro-simbólico de la tesis.
+@article{balaskas_gp3sequences_2026,
+	title = {gp3sequences: {An} {Auditable} and {Reproducible} {Framework} for {Ordered} {Categorical} {Sequence} {Analysis} in {R}},
+	volume = {6},
+	number = {10},
+	journal = {AppliedMath},
+	publisher = {MDPI AG},
+	author = {Balaskas, Nikolaos},
+	year = {2026},
+	pages = {169},
+	doi = {10.3390/appliedmath6100169},
+}
+
+% TFG de la UPV: plataforma Python para automatizar procesos contables de
+% auditoría; muestra el interés industrial en auditoría semiautomática de
+% procesos con código generado, contexto aplicado del caso de estudio.
+@mastersthesis{larrosa_auditflow_2026,
+	title = {AuditFlow: plataforma en {Python} para automatizar procesos contables de auditor{\'i}a},
+	school = {Universitat Polit{\`e}cnica de Val{\`e}ncia},
+	author = {Larrosa Mart{\'i}nez, Adri{\'a}n},
+	year = {2026},
+	url = {https://riunet.upv.es/handle/10251/239444},
+}
+% ============================================================================
+% (D) CITADAS EN INTRODUCCIÓN / RESUMEN (migradas desde ref.yml)
+% ============================================================================
+
+% Impacto real de la IA en la productividad de desarrolladores: evidencia
+% cuantitativa del acelerador que suponen los LLMs en el ciclo de desarrollo.
+% Evidencia empresarial del impacto de la IA en la productividad de desarrollo
+% (estudio de caso longitudinal; NO generalizable sin matices).
+@article{kumar2025intuition,
+	title = {Intuition to {Evidence}: {Measuring} {AI}'s {True} {Impact} on {Developer} {Productivity}},
+	author = {Kumar, A. and Khare, V. and Sharma, D. and Kumar, S. and Saini, V. and Yadav, A. and Jain, S. and Rana, A. and Verma, P. and Meena, V. and Edubilli, A.},
+	year = {2025},
+	journal = {ArXiv},
+	doi = {10.48550/arXiv.2509.19708},
+}
+
+% Traducción automática de requisitos en lenguaje natural a especificaciones
+% formales (LTL) mediante descomposición semántica jerárquica con LLMs.
+@article{ma2025bridging,
+	title = {Bridging {Natural} {Language} and {Formal} {Specification}-{Automated} {Translation} of {Software} {Requirements} to {LTL} via {Hierarchical} {Semantics} {Decomposition} {Using} {LLMs}},
+	author = {Ma, Z. and Wen, C. and Su, Z. and Liang, X. and Tian, C. and Qin, S. and Yang, M.},
+	year = {2025},
+	journal = {ArXiv},
+	doi = {10.48550/arXiv.2512.17334},
+}
+
+% Marco de evaluación de la confianza en código generado por LLMs: cuantifica
+% las alucinaciones y comportamientos no deterministas que motivan la tesis.
+@article{mohsin2024trust,
+	title = {Can {We} {Trust} {Large} {Language} {Models} {Generated} {Code}? {A} {Framework} for {In}-{Context} {Learning}, {Security} {Patterns}, and {Code} {Evaluations} {Across} {Diverse} {LLMs}},
+	author = {Mohsin, A. and Janicke, H. and Wood, A. and Sarker, I. H. and Maglaras, L. and Janjua, N.},
+	year = {2024},
+	journal = {ArXiv},
+	doi = {10.48550/arXiv.2406.12513},
+}
+
+% Texto clásico del pragmatismo: fundamenta la postura epistemológica del
+% marco metodológico (el conocimiento válido resuelve problemas concretos).
+@article{peirce1878ideas,
+	title = {How to make our ideas clear},
+	author = {Peirce, C. S.},
+	year = {1878},
+	journal = {Popular Science Monthly},
+	volume = {12},
+	pages = {286--302},
+}
+
+% Creación continua de casos de aseguramiento (assurance cases) para sistemas
+% críticos: base del eje de verificación/auditoría continua del marco propuesto.
+@article{sorokin2024continuous,
+	title = {Towards {Continuous} {Assurance} {Case} {Creation} for {ADS} with the {Evidential} {Tool} {Bus}},
+	author = {Sorokin, L. and Bouchekir, R. and Beyene, T. A. and Liao, B. and Molin, A.},
+	year = {2024},
+	journal = {ArXiv},
+	doi = {10.48550/arXiv.2403.01918},
+}
+
+% Renacimiento de la programación literaria en la era de los LLMs: núcleo
+% teórico del eje de documentación literaria de la tesis.
+@article{zhang2024renaissance,
+	title = {Renaissance of {Literate} {Programming} in the {Era} of {LLMs}: {Enhancing} {LLM}-{Based} {Code} {Generation} in {Large}-{Scale} {Projects}},
+	author = {Zhang, W. and Li, Y. and Dong, Z. and Wu, Y. and Zhou, Y. and Wang, D. and Xing, S. and Zhou, C. and Shen, D.},
+	year = {2024},
+	journal = {ArXiv},
+	doi = {10.48550/arXiv.2502.17441},
+}
+
+% Referencia fundacional de la programación literaria (Knuth, 1984).
+% Cita obligada del eje de programación literaria.
+@article{knuth1984literate,
+	title = {Literate {Programming}},
+	author = {Knuth, Donald E.},
+	year = {1984},
+	journal = {The Computer Journal},
+	volume = {27},
+	number = {2},
+	pages = {97--111},
+	doi = {10.1093/comjnl/27.2.97},
+}
+
+
