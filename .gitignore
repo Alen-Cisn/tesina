@@ -1,1 +1,8 @@
 **/*.txt
+
+# PDF compilado: se genera con `typst compile main.typ`
+/main.pdf
+
+# Libros con derechos de autor: se conservan solo localmente
+/bibliography/source/Emergency Triage 3e - ALSG 2014.pdf
+/bibliography/possible/978-3-032-32589-1.pdf

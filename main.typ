@@ -8,7 +8,7 @@
 //      - Índice
 //   3. Cuerpo (numeración arábiga desde 1):
 //      - Capítulos 1..N (introducción, marco teórico, estado del arte,
-//        marco metodológico, prototipo, ...)
+//        diseño e implementación del prototipo)
 //      - Conclusiones (capítulo N+1)
 //      - Trabajos finales (capítulo N+2)
 //   4. Referencias bibliográficas (sin número de capítulo)
@@ -53,8 +53,7 @@
   #include "sections/cap01-introduccion.typ"
   #include "sections/cap02-marco-teorico.typ"
   #include "sections/cap03-estado-del-arte.typ"
-  #include "sections/cap04-marco-metodologico.typ"
-  #include "sections/cap05-prototipo.typ"
+  #include "sections/cap04-prototipo.typ"
 
   // Capítulo N+1 — Conclusiones
   #include "sections/conclusiones.typ"
@@ -62,16 +61,34 @@
   // Capítulo N+2 — Trabajos finales
   #include "sections/trabajos-finales.typ"
 
-  // Referencias bibliográficas (sección sin número de capítulo)
+  // Referencias (APA 7, sección 2.12): página nueva, título "Referencias"
+  // centrado en negrita, solo las obras citadas en el texto (sin `full`),
+  // orden alfabético y sangría francesa (aplicados por versatile-apa).
   #pagebreak()
-  #seccion-sin-numero[Referencias bibliográficas]
-  #bibliography("bibliography/ref.bib", full: true, title: none)
+  #seccion-sin-numero[Referencias]
+  #bibliography("bibliography/ref.bib", title: none)
 ]
 
 // ----------------------------------------------------------------------------
 // Plantilla general (APA)
 // ----------------------------------------------------------------------------
 #show: apa-style.with(font-size: 12pt, running-head: [Programación literaria verificada formalmente])
+
+// Papel A4 (uso local) conservando los márgenes de 2,54 cm (1 in) que exige
+// APA 7; versatile-apa usa carta por defecto.
+#set page(paper: "a4", margin: 1in)
+
+// APA 7 usa comillas dobles; con `lang: "es"` Typst usaría comillas
+// angulares («»).
+#set smartquote(quotes: "“”")
+
+// El estilo CSL convierte los rangos de páginas a guion simple (97-111);
+// APA exige guion medio (97–111). La regex se limita a rangos precedidos por
+// ", " o "pp. " para no alterar los DOI.
+#show bibliography: it => {
+  show regex("(, |pp\. )\d+-\d+"): m => m.text.replace("-", "–")
+  it
+}
 
 // ----------------------------------------------------------------------------
 // Show-rule de cuerpo para encabezados de capítulo (marca [capitulo]):
@@ -128,7 +145,10 @@
     #text(font: caratula-font, size: 16pt, weight: "bold")[Licenciado de Informática]
 
     #v(2em)
-    #text(font: caratula-font, size: 16pt)[#datetime.today().display("[month repr:long] - [year]")]
+    // `datetime.display` siempre imprime el mes en inglés; se traduce a mano.
+    #let meses = ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+    #let hoy = datetime.today()
+    #text(font: caratula-font, size: 16pt)[#meses.at(hoy.month() - 1) - #hoy.year()]
 
     #v(2fr)
   ]

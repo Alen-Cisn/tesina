@@ -3,6 +3,9 @@
 // ============================================================================
 #import "../tesis-template.typ": contador-capitulo
 
+// APA 7: el resumen ocupa su propia página; el índice comienza en otra.
+#pagebreak()
+
 // Los capítulos usan `capitulo`, que numera "Capítulo N — Título" en el
 // cuerpo, pero el outline resuelve los contadores en su propia ubicación.
 // Esta show-rule recalcula el número de capítulo en la ubicación del

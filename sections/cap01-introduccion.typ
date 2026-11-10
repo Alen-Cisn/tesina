@@ -8,89 +8,60 @@
 
 = Planteamiento del problema
 
-El desarrollo de software crítico, como el utilizado en el protocolo Triage de Manchester —un sistema de clasificación de pacientes basado en prioridades clínicas— exige altos estándares de confiabilidad, seguridad y auditabilidad @noauthor_emergency_nodate @sorokin2024continuous. Los Modelos de Lenguaje Avanzados (como en español se los llama a los Large Language Models, LLMs por sus siglas en inglés) han demostrado ser herramientas efectivas para la generación automática de código, mejorando la productividad y acelerando el ciclo de desarrollo @kumar2025intuition. Sin embargo, su adopción en sistemas críticos se ve limitada por tres problemas fundamentales.
+El desarrollo de software crítico exige altos estándares de confiabilidad, seguridad y auditabilidad. Un ejemplo es el software que implementa el Sistema de Triage de Manchester (MTS, por sus siglas en inglés), un protocolo que asigna a cada paciente que llega a un servicio de urgencias una de cinco prioridades clínicas —inmediata (rojo), muy urgente (naranja), urgente (amarillo), estándar (verde) y no urgente (azul)— a partir de flujogramas de presentación y discriminadores @mackwayjones2014emergency. Un error en esa lógica puede demorar la atención de un paciente grave.
+
+Los modelos de lenguaje avanzados (LLM, por las siglas de #emph[large language models]) se han convertido en herramientas habituales para generar código. Un estudio longitudinal realizado durante un año con 300 ingenieros de una misma empresa informó, por ejemplo, una reducción del 31,8 % en el tiempo de revisión de los cambios propuestos @kumar2025intuition. Sin embargo, su adopción en sistemas críticos se ve limitada por tres problemas.
 
 == Falta de determinismo y verificabilidad
 
-Los LLMs generan código con alucinaciones (resultados plausibles pero incorrectos) y comportamientos no deterministas, lo que compromete la fiabilidad en entornos donde la precisión es crítica @mohsin2024trust @koomullil_proof-carrying_2026. Los enfoques de traducción de requisitos en lenguaje natural a especificaciones formales @ma2025bridging permiten atacar este problema desde la fase de especificación.
+Los LLM son modelos probabilísticos: pueden producir código plausible pero incorrecto (alucinaciones) y no garantizan el mismo resultado ante la misma instrucción @yuan2026guiding @koomullil_proof-carrying_2026. Además, pueden reproducir vulnerabilidades y malas prácticas presentes en sus datos de entrenamiento @mohsin2024trust. Ninguna de estas propiedades es compatible con un sistema cuya salida determina el orden de atención de los pacientes.
 
 == Auditoría humana insostenible
 
-La revisión manual de código generado por LLMs es costosa y propensa a errores, especialmente en sistemas con requisitos complejos como el Triage de Manchester @yuan2026guiding, donde la ambigüedad en la interpretación de reglas clínicas @noauthor_emergency_nodate puede llevar a fallos graves.
+Revisar manualmente el código generado es costoso y propenso a errores. #cite(<yuan2026guiding>, form: "prose") observaron que muchas fallas del código generado por LLM provienen de requisitos subespecificados o de desviaciones semánticas sutiles, que no se detectan con verificaciones automáticas de grano grueso y que exigen una revisión humana detallada. En el caso del MTS, la dificultad se agrava porque quien conoce el dominio —el personal de salud— no suele leer código, y quien lee código no domina los criterios clínicos de cada discriminador.
 
 == Falta de integración sistemática
 
-Aunque existen metodologías, técnicas y herramientas para reducir errores en el desarrollo tradicional de software, no hay una integración sistemática entre estas facilidades y los LLMs @sorokin2024continuous.
+La ingeniería de software dispone de metodologías y herramientas maduras para reducir errores en el desarrollo tradicional, como la verificación formal o los casos de aseguramiento que se mantienen de forma continua a medida que cambia el sistema @sorokin2024continuous. Existen también propuestas que acercan los LLM a la especificación formal @ma2025bridging o a la validación humana @yuan2026guiding. No obstante, en la revisión realizada para este trabajo no se identificó un enfoque que integre de manera sistemática generación con LLM, verificación formal y documentación auditable por especialistas del dominio en el desarrollo de software clínico. Esta vacancia se desarrolla en el Capítulo 3.
 
-= Preguntas e hipótesis
+= Preguntas de investigación
 
 == Pregunta principal
 
-¿Cómo puede mejorarse, en una implementación del Triage de Manchester, la eficacia de los LLMs en el ciclo de vida de desarrollo mediante la integración de verificación formal y programación literaria?
+¿Cómo puede diseñarse e implementarse un sistema que integre generación de código por LLM, verificación formal y programación literaria para desarrollar una implementación del Triage de Manchester verificada y auditable?
 
 == Preguntas secundarias
 
-- ¿Qué impacto tiene, durante el ciclo de desarrollo del protocolo Triage de Manchester, la integración de código generado por LLMs y la programación literaria en la legibilidad de la documentación interseccionada con el código y la eficiencia de la auditoría humana?
-- ¿Cómo se diseñaría un sistema que, aplicado al protocolo Triage de Manchester, combine generación de código por LLMs, verificación formal, programación literaria y auditoría humana eficiente y eficaz?
-
-== Hipótesis
-
-La integración de verificación formal y programación literaria en el ciclo de desarrollo asistido por LLMs incrementa la corrección del código generado y reduce el esfuerzo de auditoría humana, sin sacrificar la velocidad de desarrollo, incluso en dominios de alta criticidad como el triage hospitalario.
++ ¿Qué propiedades del flujograma de dolor torácico del MTS pueden expresarse y demostrarse formalmente en Lean 4?
++ ¿Cómo debe estructurarse la documentación literaria para que la especificación formal pueda ser leída y validada por auditores clínicos y técnicos?
++ ¿Cómo se organiza el ciclo de generación, verificación y corrección para que el LLM aproveche la retroalimentación del asistente de pruebas?
 
 = Objetivos
 
 == Objetivo general
 
-Proponer e implementar un marco neuro-simbólico que integre generación de código por LLMs, verificación formal y programación literaria para el desarrollo de software crítico, tomando como caso de estudio el protocolo Triage de Manchester.
+Diseñar e implementar un prototipo de marco neuro-simbólico que integre generación de código por LLM, verificación formal y programación literaria para el desarrollo de software crítico, tomando como caso de estudio el Sistema de Triage de Manchester.
 
 == Objetivos específicos
 
-- Analizar la viabilidad de un sistema neuro-simbólico que permita a los LLMs generar código verificado formalmente, con documentación clara (programación literaria) y retroalimentación automatizada @yuan2026guiding.
-- Diseñar un flujo de trabajo que integre generación de código por LLMs a partir de requisitos clínicos (ej.: "Si el paciente tiene dolor torácico y presión arterial < 90, asignar prioridad 1"), verificación formal del código generado y generación de documentación legible para auditores humanos (médicos o ingenieros) mediante programación literaria.
-- Implementar un prototipo aplicado al Triage de Manchester, que traduzca requisitos clínicos a código verificable y genere documentación auditable.
-- Evaluar el prototipo con técnicas cuantitativas (bugs, cumplimiento de invariantes) y cualitativas (usabilidad de la documentación para auditores).
++ Analizar la viabilidad técnica de un sistema neuro-simbólico que permita a los LLM generar código verificado formalmente, acompañado de documentación literaria y de retroalimentación automatizada.
++ Diseñar un flujo de trabajo que parta de los requisitos clínicos del MTS, genere código con un LLM, lo verifique formalmente y produzca documentación legible para auditores clínicos y técnicos. Un requisito típico es la regla del flujograma de dolor torácico según la cual un paciente que presenta el discriminador _shock_ —definido como un aporte inadecuado de oxígeno a los tejidos, con signos como sudoración, palidez, taquicardia, hipotensión o disminución del nivel de conciencia— recibe prioridad inmediata (rojo) @mackwayjones2014emergency.
++ Implementar un prototipo que traduzca los requisitos clínicos del flujograma de dolor torácico a una especificación y un código verificados en Lean 4, y que genere la documentación literaria correspondiente.
 
 = Justificación
 
-Esta investigación contribuye al campo de la ingeniería de software y la inteligencia artificial al proponer un marco que integre LLMs, verificación formal y programación literaria. La verificación formal permite asegurar que el código cumple con propiedades críticas @moura2021lean, mientras que la programación literaria mejora la claridad y estructura del código, facilitando la auditoría humana @zhang2024renaissance @yuan2026guiding. Este enfoque neuro-simbólico, combinación de aprendizaje automático y razonamiento lógico, busca generar código no solo sintácticamente correcto, sino semánticamente válido y verificable @ma2025bridging.
+La verificación formal permite demostrar que un programa cumple las propiedades que se le especifican @moura2021lean. Esa garantía, sin embargo, es relativa a la especificación: un programa puede satisfacer perfectamente una especificación que no refleja el protocolo clínico. La verificación responde a la pregunta "¿el código hace lo que dice la especificación?", pero no a "¿la especificación dice lo que establece el MTS?". La segunda pregunta solo puede responderla una persona que conozca el dominio, y para ello necesita leer la especificación en un lenguaje que comprenda.
 
-= Marco de referencia
+Este trabajo sostiene que la programación literaria es el puente entre ambas preguntas. Al intercalar la especificación formal, las demostraciones y el código con una narrativa en lenguaje natural @knuth1984literate, la documentación literaria convierte la validación de la especificación en una tarea de lectura accesible para auditores clínicos, mientras que la verificación formal libera a esos auditores de revisar la implementación línea por línea. #cite(<yuan2026guiding>, form: "prose") mostraron que una documentación en lenguaje natural no ambigua, validada por el usuario y usada luego para derivar propiedades verificables, mejora sustancialmente la corrección del código generado por LLM. Este trabajo extiende esa idea a un dominio clínico y a un asistente de pruebas.
 
-== Programación literaria
+La contribución esperada es doble. En el plano de la ingeniería de software, el diseño de un marco que combina aprendizaje automático y razonamiento lógico para producir código no solo sintácticamente correcto, sino verificado y auditable. En el plano aplicado, un prototipo que demuestra la factibilidad técnica de ese marco sobre un protocolo clínico real.
 
-La programación literaria, concebida por Knuth @knuth1984literate, intercala narrativa explicativa y código ejecutable en un mismo documento fuente, orientado primordialmente a lectores humanos. Trabajos recientes retoman esta idea en la era de los LLMs para mejorar la generación de código en proyectos de gran escala @zhang2024renaissance, y estudian su rol como interfaz de validación y trazabilidad para no programadores y auditores @candela_approach_2023 @yuan2026guiding.
+= Alcance
 
-== Verificación formal y asistentes de pruebas
+El MTS comprende más de cincuenta flujogramas de presentación @mackwayjones2014emergency. Este trabajo se limita al flujograma de dolor torácico, que combina discriminadores generales (por ejemplo, _shock_ o compromiso de la vía aérea) con discriminadores específicos basados en umbrales numéricos (por ejemplo, saturación de oxígeno o frecuencia de pulso), lo que lo hace representativo de los desafíos de formalización del protocolo.
 
-Los asistentes de pruebas como Lean 4 permiten verificar formalmente que un programa cumple con propiedades especificadas @moura2021lean. El ecosistema actual incluye herramientas como LeanDojo, que provee datos y un entorno programable para trabajar con Lean en contextos de aprendizaje automático @yang_leandojo_2023.
+El trabajo comprende el diseño y la implementación del prototipo. La evaluación empírica del marco —por ejemplo, la comparación con un desarrollo sin verificación formal ni documentación literaria, o la medición del esfuerzo de auditoría con profesionales de la salud— queda fuera del alcance y se propone como trabajo futuro. El prototipo no se destina al uso clínico.
 
-== Sistemas de triage y software clínico
+= Estructura del trabajo
 
-El Manchester Triage System se sustenta en flujogramas y discriminadores @noauthor_emergency_nodate que han sido estudiados en relación con la construcción de software clínico seguro @zlotnik_building_2016, con estudios de concordancia entre pacientes y sistemas de autotriage @onler_agreement_2026 y de rendimiento comparativo entre LLMs y profesionales en triage @masanneck_triage_2024.
-
-= Estado del arte
-
-- *Generación de código con LLMs:* evaluaciones recientes miden el impacto real de la IA en la productividad de desarrolladores @kumar2025intuition y proponen marcos para evaluar la confianza en el código generado @mohsin2024trust.
-- *Traducción de requisitos a especificaciones formales:* enfoques automáticos que usan descomposición semántica jerárquica con LLMs para traducir requisitos en lenguaje natural a lógica temporal (LTL) @ma2025bridging.
-- *Verificación continua y aseguramiento:* herramientas de creación continua de casos de aseguramiento (assurance cases) para sistemas críticos @sorokin2024continuous.
-- *Programación literaria y auditoría:* renovación de la programación literaria con LLMs @zhang2024renaissance, secuencias GP3 para validar la adherencia de código a la narrativa @balaskas_gp3sequences_2026, experiencias con estándares de documentación para auditores @candela_approach_2023 y validación humana de código LLM mediante programación literaria verificable @yuan2026guiding.
-
-= Aspectos metodológicos
-
-== Paradigma
-
-El paradigma elegido es el pragmatismo. Este paradigma permite combinar validación formal con Lean 4, documentación narrativa (literate programming) y feedback humano, evaluando cada componente por su contribución a la generación de software correcto. El conocimiento válido se define por su capacidad para resolver problemas concretos @peirce1878ideas, en este caso: reducir errores en el código generado por LLMs y mejorar la comprensión del código por parte de los desarrolladores.
-
-== Método
-
-Usaremos un método mixto, juntando cualitativo y cuantitativo.
-
-=== Técnicas cuantitativas
-
-- Experimentos controlados para medir el número de bugs y el cumplimiento de invariantes en el código generado @ma2025bridging.
-- Benchmarking con herramientas de verificación formal que provee el ecosistema de Lean 4 para evaluar la corrección del código @moura2021lean.
-
-=== Técnicas cualitativas
-
-- Análisis de usabilidad de la documentación generada (mediante encuestas a auditores humanos).
-- Entrevistas a desarrolladores para evaluar la eficiencia de la auditoría.
+El Capítulo 2 presenta el marco teórico: los LLM aplicados a la generación de código, la verificación formal con Lean 4, la programación literaria, la auditoría y el MTS. El Capítulo 3 revisa el estado del arte y delimita la vacancia que motiva este trabajo. El Capítulo 4 expone el diseño y la implementación del prototipo. Por último, se presentan las conclusiones y los trabajos finales.

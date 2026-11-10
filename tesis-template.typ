@@ -10,8 +10,8 @@
 // `contador-capitulo` (una entrada por capítulo, sin verse afectado por los
 // subencabezados ==, ===). El encabezado se marca con supplement: [capitulo]
 // para que las show-rules de main.typ e indice.typ puedan reconocerlo.
-// Los subencabezados (==, ===) se numeran "N.M", "N.M.K" mediante la regla
-// `#set heading(numbering: "1.1.")` de main.typ.
+// Siguiendo APA 7, los encabezados internos (=, ==, ===) no se numeran;
+// versatile-apa les aplica el formato de niveles 1, 2 y 3.
 // ============================================================================
 
 // Contador propio de capítulos (independiente del contador de headings,
